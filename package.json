@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "A11y enhancements to the default Ember-CLI blueprint",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "ember-blueprint"
   ],
   "repository": "git+https://github.com/kellyselden/ember-a11y-blueprint.git",
   "license": "MIT",
