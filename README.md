@@ -1,7 +1,10 @@
 ember-a11y-blueprint
 ==============================================================================
 
-[Short description of the addon.]
+[![npm version](https://badge.fury.io/js/ember-extra-blueprint.svg)](https://badge.fury.io/js/ember-extra-blueprint)
+[![Build Status](https://travis-ci.com/kellyselden/ember-a11y-blueprint.svg?branch=master)](https://travis-ci.com/kellyselden/ember-a11y-blueprint)
+
+A11y enhancements to the default Ember-CLI blueprint
 
 
 Compatibility
