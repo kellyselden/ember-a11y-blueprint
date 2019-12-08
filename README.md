@@ -6,6 +6,7 @@ ember-a11y-blueprint
 
 A11y enhancements to the default Ember-CLI blueprint
 
+Inspired by the conversation in https://github.com/ember-cli/ember-cli/issues/8599
 
 Compatibility
 ------------------------------------------------------------------------------
@@ -19,7 +20,7 @@ Installation
 ------------------------------------------------------------------------------
 
 ```
-ember install ember-a11y-blueprint
+ember init -b ember-a11y-blueprint
 ```
 
 
