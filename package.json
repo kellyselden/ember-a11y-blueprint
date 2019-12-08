@@ -1,6 +1,6 @@
 {
   "name": "ember-a11y-blueprint",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A11y enhancements to the default Ember-CLI blueprint",
   "keywords": [
     "ember-addon",
