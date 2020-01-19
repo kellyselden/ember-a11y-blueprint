@@ -38,6 +38,7 @@
     "ember-cli-sri": "^2.1.1",
     "ember-cli-template-lint": "^1.0.0-beta.3",
     "ember-cli-uglify": "^3.0.0",
+    "ember-cli-update-test-helpers": "0.4.0",
     "ember-disable-prototype-extensions": "^1.1.3",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^2.1.0",
@@ -49,11 +50,9 @@
     "ember-try": "^1.2.1",
     "eslint-plugin-ember": "^7.1.0",
     "eslint-plugin-node": "^10.0.0",
-    "execa": "^3.4.0",
     "loader.js": "^4.7.0",
     "mocha": "^6.2.2",
-    "qunit-dom": "^0.9.0",
-    "tmp": "0.1.0"
+    "qunit-dom": "^0.9.0"
   },
   "engines": {
     "node": "8.* || >= 10.*"
