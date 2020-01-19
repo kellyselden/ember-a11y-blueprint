@@ -1,99 +1,88 @@
 'use strict';
 
-const execa = require('execa');
-const { promisify } = require('util');
-const newTmpDir = promisify(require('tmp').dir);
 const path = require('path');
+const {
+  emberNew: _emberNew,
+  emberInit: _emberInit,
+  setUpBlueprintMocha
+} = require('ember-cli-update-test-helpers');
 const chai = require('chai');
 
 chai.use(require('chai-fs'));
 
 const { expect } = chai;
 
-const blueprintPath = path.resolve(__dirname, '../..');
-const projectName = 'my-project';
-
-function ember(args, options) {
-  let ps = execa('ember', args, {
-    preferLocal: true,
-    localDir: __dirname,
-    stdio: ['pipe', 'pipe', 'inherit'],
-    ...options
+async function emberNew({
+  args = []
+}) {
+  return await _emberNew({
+    args: [
+      '-sn',
+      '-sg',
+      ...args
+    ]
   });
+}
 
-  ps.stdout.pipe(process.stdout);
-
-  return ps;
+async function emberInit({
+  args = [],
+  cwd
+}) {
+  return await _emberInit({
+    args: [
+      '-sn',
+      ...args
+    ],
+    cwd
+  });
 }
 
 describe('blueprint', function() {
-  this.timeout(5 * 1000);
+  this.timeout(10 * 1000);
 
-  beforeEach(async function() {
-    this.tmpPath = await newTmpDir();
-    this.projectPath = path.join(this.tmpPath, projectName);
-  });
+  setUpBlueprintMocha.call(this);
 
   it('works with default options', async function() {
-    await ember([
-      'new',
-      projectName,
-      '-sn',
-      '-sg',
-      '-b',
-      blueprintPath
-    ], {
-      cwd: this.tmpPath
+    let cwd = await emberNew({
+      args: [
+        '-b',
+        this.blueprintPath
+      ]
     });
 
-    expect(path.join(this.projectPath, 'app/index.html'))
+    expect(path.join(cwd, 'app/index.html'))
       .to.be.a.file().with.contents.that.match(/<html lang="en">/);
   });
 
   it('works with custom options', async function() {
-    await ember([
-      'new',
-      projectName,
-      '-sn',
-      '-sg',
-      '-b',
-      blueprintPath,
-      '--lang=es'
-    ], {
-      cwd: this.tmpPath
+    let cwd = await emberNew({
+      args: [
+        '-b',
+        this.blueprintPath,
+        '--lang=es'
+      ]
     });
 
-    expect(path.join(this.projectPath, 'app/index.html'))
+    expect(path.join(cwd, 'app/index.html'))
       .to.be.a.file().with.contents.that.match(/<html lang="es">/);
   });
 
   it('works in addon', async function() {
-    await ember([
-      'addon',
-      projectName,
-      '-sn',
-      '-sg'
-    ], {
-      cwd: this.tmpPath
+    let cwd = await emberNew({
+      args: [
+        '-b=addon'
+      ]
     });
 
-    let ps = ember([
-      'init',
-      '-sn',
-      '-b',
-      blueprintPath
-    ], {
-      cwd: this.projectPath
+    await emberInit({
+      args: [
+        '-b',
+        this.blueprintPath
+      ],
+      cwd
     });
 
-    ps.stdout.on('data', () => {
-      // overwrite everything with no regard
-      ps.stdin.write('y\n');
-    });
-
-    await ps;
-
-    expect(path.join(this.projectPath, 'tests/dummy/app/index.html'))
+    expect(path.join(cwd, 'tests/dummy/app/index.html'))
       .to.be.a.file().with.contents.that.match(/<html lang="en">/);
   });
 });
