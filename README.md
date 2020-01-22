@@ -27,8 +27,17 @@ ember init -b ember-a11y-blueprint
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+### Using custom language with the blueprint
 
+If you want to set a language other than `en` as your default language for your app
+you can make use of the `--lang` option with the blueprint.
+
+For example if you want `es` as your default language,
+```
+ember init -b ember-a11y-blueprint --lang=es
+```
+
+For the entire list of available language codes, you can refer [here](https://www.loc.gov/standards/iso639-2/php/English_list.php)
 
 Contributing
 ------------------------------------------------------------------------------
