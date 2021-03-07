@@ -5,15 +5,17 @@ module.exports = {
 
   availableOptions: [
     {
-      name: "lang",
+      name: 'lang',
       type: String,
-      default: "en"
-    }
+      default: 'en',
+    },
   ],
 
   locals(options) {
     return {
-      lang: options.lang || this.availableOptions.find(o => o.name === 'lang').default
+      lang:
+        options.lang ||
+        this.availableOptions.find((o) => o.name === 'lang').default,
     };
   },
 
@@ -21,7 +23,7 @@ module.exports = {
     return {
       __root__() {
         return options.inAddon ? 'tests/dummy' : '';
-      }
+      },
     };
-  }
+  },
 };
